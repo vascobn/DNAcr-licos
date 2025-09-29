@@ -1,0 +1,259 @@
+<!--
+DNAcrílicos - Single-page site (HTML/CSS/JS)
+Instructions:
+1) Save this file as `index.html` and upload to your host (Netlify, GitHub Pages, cPanel...).
+2) Put your logo at `/assets/logo.png` or change the <img> src in the header.
+3) Add up to 20 photos into `/assets/gallery/` and update the gallery <img> src attributes or use the `data-src` pattern already present.
+4) FORM: Replace the Formspree action URL with your project endpoint (https://formspree.io/f/{your-id}).
+5) COLORS: Edit the CSS variables under :root to adjust the neutral blues and white to your exact brand colors.
+6) MAP: The embedded Google Maps iframe uses a simple address query. If you prefer a more advanced map, swap the iframe with your Google Maps embed link.
+7) WhatsApp button uses +351916904090. Change the number if needed.
+
+If you want, I can customize colors and gallery images for you — send exact hex codes and the images.
+-->
+
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNAcrílicos — Acrílicos e Trabalhos</title>
+  <meta name="description" content="DNAcrílicos — soluções em acrílico. Trabalhos, contactos e portfólio.">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #6e6e6e; /* dark blue for text */
+      --accent: #478779; /* neutral blue - change as needed */
+      --muted: #577371;
+      --card: #f6f9fc;
+      --radius: 14px;
+      --max-width: 1100px;
+      --gap: 18px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:64px;width:auto}
+    .brand h1{font-size:20px;margin:0}
+
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;padding:28px 0}
+    .intro{padding:28px;background:linear-gradient(180deg,rgba(42,111,184,0.06),transparent);border-radius:var(--radius)}
+    .intro h2{margin:0 0 8px 0}
+    .intro p{margin:0;color:var(--muted)}
+
+    .contact-card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(10,20,30,0.04)}
+    .contact-item{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+    .contact-item strong{min-width:90px;display:inline-block}
+
+    section{padding:28px 0;border-top:1px solid #eef3f7}
+    h3{margin:0 0 12px 0}
+
+    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap)}
+    .service{background:var(--card);padding:14px;border-radius:10px}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+    .gallery img{width:100%;height:200px;object-fit:cover;border-radius:10px;cursor:pointer;display:block}
+
+    .testimonials{display:flex;flex-direction:column;gap:12px}
+    .testimonial{background:#fff;padding:14px;border-radius:10px;border:1px solid #eef3f7}
+
+    .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .contact-form input,.contact-form textarea{padding:10px;border-radius:8px;border:1px solid #dfeaf5}
+    .contact-form textarea{grid-column:1/-1;min-height:120px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border:none;border-radius:8px;cursor:pointer}
+
+    footer{padding:18px 0;color:var(--muted);font-size:14px}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:999}
+    .lightbox img{max-width:94%;max-height:86%;border-radius:8px}
+
+    /* WhatsApp floating */
+    .whatsapp{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border-radius:999px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 22px rgba(42,111,184,0.18);text-decoration:none}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .contact-form{grid-template-columns:1fr}
+      .brand img{height:52px}
+    }
+
+  </style>
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="assets/favicon-180.png">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <!-- Replace src with your logo path -->
+        <img src="assets/logo.png" alt="DNAcrílicos logo" onerror="this.style.display='none'">
+        <div>
+          <h1>DNAcrílicos</h1>
+          <div style="color:var(--muted);font-size:13px">Acrílicos — qualidade e detalhe</div>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="#services">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#contact">Contactos</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="intro">
+          <h2>Acrílicos de Qualidade Feitos à sua Medida</h2>
+          <p>Desde displays e sinalética a móveis e peças personalizadas. Entregamos qualidade, rapidez e solução à medida.</p>
+          <div style="height:12px"></div>
+          <div style="display:flex;gap:12px">
+            <a class="btn" href="#contact">Pedir Orçamento</a>
+            <a style="align-self:center;color:var(--muted);text-decoration:none" href="#portfolio">Ver Portfólio</a>
+          </div>
+        </div>
+
+        <aside class="contact-card">
+          <div class="contact-item"><strong>Telefone</strong><span>+351 916 954 090</span></div>
+          <div class="contact-item"><strong>Morada</strong><span>Rua Padre Ângelo Firmino da Silva 12A</span></div>
+          <div class="contact-item"><strong>Horário</strong><span>Seg–Sex: 09:00–18:30</span></div>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">Sem redes sociais ainda — teremos em breve.</div>
+        </aside>
+      </section>
+
+      <section id="services">
+        <h3>Serviços</h3>
+        <p style="color:var(--muted);margin-bottom:12px">Soluções completas em acrílico para todas as necessidades.</p>
+        <div class="services">
+          <div class="service"><strong>Corte e gravação</strong><div style="color:var(--muted);font-size:13px">Precisão CNC e laser para peças e painéis.</div></div>
+          <div class="service"><strong>Dobra e montagem</strong><div style="color:var(--muted);font-size:13px">Dobragem térmica e montagem de expositores.</div></div>
+          <div class="service"><strong>Displays & Loja</strong><div style="color:var(--muted);font-size:13px">Peças para point-of-sale, montras e stands.</div></div>
+          <div class="service"><strong>Design personalizado</strong><div style="color:var(--muted);font-size:13px">Projetos à medida — do conceito à peça final.</div></div>
+        </div>
+      </section>
+
+      <section id="portfolio">
+        <h3>Portfólio</h3>
+        <p style="color:var(--muted);margin-bottom:12px">Alguns trabalhos recentes — clique nas imagens para ampliar.</p>
+        <div class="gallery">
+          <!-- Replace with your images (up to 20). Keep the data-full attribute for lightbox. -->
+        <div class="gallery">
+          <img src="assets/gallery/1.jpg" data-full="assets/gallery/1.jpg" alt="Projeto 1" loading="lazy">
+          <img src="assets/gallery/2.jpg" data-full="assets/gallery/2.jpg" alt="Projeto 2" loading="lazy">
+          <img src="assets/gallery/3.jpg" data-full="assets/gallery/3.jpg" alt="Projeto 3" loading="lazy">
+          <img src="assets/gallery/4.jpg" data-full="assets/gallery/4.jpg" alt="Projeto 4" loading="lazy">
+          <img src="assets/gallery/5.jpg" data-full="assets/gallery/5.jpg" alt="Projeto 5" loading="lazy">
+          <img src="assets/gallery/6.jpg" data-full="assets/gallery/6.jpg" alt="Projeto 6" loading="lazy">
+          <img src="assets/gallery/7.jpg" data-full="assets/gallery/7.jpg" alt="Projeto 7" loading="lazy">
+          <img src="assets/gallery/9.jpg" data-full="assets/gallery/9.jpg" alt="Projeto 9" loading="lazy">
+          <img src="assets/gallery/10.jpg" data-full="assets/gallery/10.jpg" alt="Projeto 10" loading="lazy">
+          <img src="assets/gallery/11.jpg" data-full="assets/gallery/11.jpg" alt="Projeto 11" loading="lazy">
+          <img src="assets/gallery/12.jpg" data-full="assets/gallery/12.jpg" alt="Projeto 12" loading="lazy">
+          <img src="assets/gallery/13.jpg" data-full="assets/gallery/13.jpg" alt="Projeto 13" loading="lazy">
+          <img src="assets/gallery/14.jpg" data-full="assets/gallery/14.jpg" alt="Projeto 14" loading="lazy">
+          <img src="assets/gallery/15.jpg" data-full="assets/gallery/15.jpg" alt="Projeto 15" loading="lazy">
+          <img src="assets/gallery/16.jpg" data-full="assets/gallery/16.jpg" alt="Projeto 16" loading="lazy">
+          <img src="assets/gallery/17.jpg" data-full="assets/gallery/17.jpg" alt="Projeto 17" loading="lazy">
+          <img src="assets/gallery/18.jpg" data-full="assets/gallery/18.jpg" alt="Projeto 18" loading="lazy">
+          <img src="assets/gallery/19.jpg" data-full="assets/gallery/19.jpg" alt="Projeto 19" loading="lazy">
+        </div>
+
+      </section>
+
+      <section id="contact">
+        <h3>Contactos & Pedido de Orçamento</h3>
+        <p style="color:var(--muted);margin-bottom:12px">Preencha o formulário ou use o telefone/WhatsApp para contacto direto.</p>
+
+        <!-- FORM: replace action with your Formspree endpoint -->
+        <form class="contact-form" action="https://formspree.io/f/xkgqgbqw" method="POST">
+          <input type="text" name="name" placeholder="Nome" required>
+          <input type="tel" name="phone" placeholder="Telemóvel" required>
+          <input type="email" name="_replyto" placeholder="Email do cliente" required>
+          <input type="text" name="subject" placeholder="Assunto">
+          <textarea name="message" placeholder="Descreva o trabalho ou pedido" required></textarea>
+          <button class="btn" type="submit">Enviar Pedido</button>
+        </form>
+
+        <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+          <div style="background:var(--card);padding:12px;border-radius:10px">
+            <strong>Visita-nos</strong>
+            <div style="margin-top:8px;color:var(--muted)">Rua Padre Ângelo Firmino da Silva 12A</div>
+            <div style="margin-top:12px">
+              <!-- Simple Google Maps embed using address query -->
+              <iframe width="100%" height="200" frameborder="0" style="border:0;border-radius:8px" src="https://www.google.com/maps?q=Rua+Padre+Angelo+Firmino+da+Silva+12A&output=embed" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div style="background:var(--card);padding:12px;border-radius:10px">
+            <strong>Informações rápidas</strong>
+            <div style="margin-top:8px;color:var(--muted)"><strong>Telefone:</strong> +351 916 954 090</div>
+            <div style="margin-top:6px;color:var(--muted)"><strong>Horário:</strong> 09:00 - 18:30</div>
+            <div style="margin-top:8px;color:var(--muted)">Email: <em>dnacrilicos2020@gmail.com</em></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© <strong>DNAcrílicos</strong> — Rua Padre Ângelo Firmino da Silva 12A</div>
+        <div style="color:var(--muted)">Telefone: +351 916 954 090</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Lightbox container -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <img id="lightbox-img" src="" alt="Ampliar imagem">
+  </div>
+
+  <!-- WhatsApp floating button -->
+  <a class="whatsapp" href="https://wa.me/351916954090" target="_blank" rel="noopener noreferrer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M20.52 3.48A11.95 11.95 0 0012 1.5C6.21 1.5 1.5 6.21 1.5 12c0 2.11.55 4.08 1.6 5.82L1.5 22.5l4.05-1.06A11.94 11.94 0 0012 22.5c5.79 0 10.5-4.71 10.5-10.5 0-3.02-1.18-5.82-3.48-7.52z" fill="#fff"/>
+    </svg>
+    <span style="font-weight:700">WhatsApp</span>
+  </a>
+
+  <script>
+    // Lightbox behaviour
+    const gallery = document.querySelector('.gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+
+    gallery?.addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      const full = img.getAttribute('data-full') || img.src;
+      lbImg.src = full;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
+    });
+
+    lightbox?.addEventListener('click', ()=>{
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden','true');
+      lbImg.src = '';
+    });
+
+    // Simple accessibility: close on esc
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        lightbox.style.display = 'none';
+        lightbox.setAttribute('aria-hidden','true');
+        lbImg.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
